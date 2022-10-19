@@ -1,0 +1,81 @@
+﻿@model AMS.Models.LoanVM
+
+@{
+    ViewData["Title"] = "Edit Loan";
+}
+
+<h1>Edit</h1>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div class="form-row">
+
+                <div class="form-group col-md-6">
+                    <label asp-for="LoanType" class="control-label"></label>
+                    <select id="LoanType" asp-for="LoanType"
+                            asp-items="@AMS.Utility.Helper.GetLoanTypeDropDown()"
+                            class="form-control">
+                        <option value="">Select Device</option>
+                    </select>
+                    <span asp-validation-for="LoanType" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="LoanTerm" for="LoanTerm">Loan Term</label>
+                    <input asp-for="LoanTerm" type="number" class="form-control" id="loanTerm" placeholder="loan term">
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="InterestRate"></label>
+                    <input type="Name" asp-for="InterestRate" class="form-control e-input" id="InterestRate" placeholder="Interest Rate" disabled>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Amount"></label>
+                    <input type="Name" asp-for="Amount" class="form-control" id="Amount" placeholder="Amount">
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" disabled value="Save Changes" class="btn btn-success " /> <a class="btn btn-outline-secondary" asp-action="Index">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+    @section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(function () {
+
+            $("#LoanType").change(function () {
+
+                var val1 = $(this).val();
+                var result = "";
+                switch (val1) {
+
+                    case "personal":
+                        result = "25%";
+                        break;
+                    case "home":
+                        result = "10%";
+                        break;
+                    case "vehicle":
+                        result = "15%";
+                        break;
+                }
+                $("#InterestRate").val(result);
+            });
+        });
+
+    </script>
+
+
+}
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+

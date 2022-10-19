@@ -1,0 +1,101 @@
+﻿@model AMS.Models.LoanVM
+
+@{
+    ViewData["Title"] = "Add a Loan";
+}
+
+<div class="card">
+  <div class="card-header">
+  <div class="wrapper-inner-card d-flex justify-content-between align-items-center">
+            <h3 class="text-uppercase">Add Loan</h3>
+    <button type="button" class="btn back btn-secondary"><a asp-action="Index">Back</a></button>
+  </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 card-body">
+      <form asp-action="Create" enctype="multipart/form-data">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+                        <label asp-for="CustomerId" class="control-label"></label>
+                        @Html.DropDownListFor(q => q.CustomerId, new SelectList(Model.CustomerList, "Value", "Text"), "Select Customer Name",
+            new { @class = "form-control" })
+                        <span asp-validation-for="CustomerId" class="text-danger"></span>
+          </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="LoanType" class="control-label"></label>
+                        <select id="LoanType" asp-for="LoanType"
+                                asp-items="@AMS.Utility.Helper.GetLoanTypeDropDown()"
+                                class="form-control">
+                            <option value="">Select Device</option>
+                        </select>
+                        <span asp-validation-for="LoanType" class="text-danger"></span>
+                    </div>
+        </div>
+        <div class="form-row">
+
+                        <div class="form-group col-md-6">
+                                <label asp-for="LoanTerm"></label>
+                                <input type="number" asp-for="LoanTerm" class="form-control" id="LoanTerm" placeholder="Loan Tearm">
+                        </div>
+
+                        <div class="form-group col-md-6">
+                                <label asp-for="InterestRate"></label>
+                                <input type="Name" asp-for="InterestRate" class="form-control e-input" id="InterestRate" placeholder="Interest Rate" disabled>
+                        </div>
+                    <div class="form-group col-md-6">
+                            <label asp-for="Amount"></label>
+                            <input type="Name" asp-for="Amount" class="form-control" id="Amount" placeholder="Amount">
+                    </div>
+          </div>
+
+          <div class="form-group ">
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Add New Loan</button>
+          </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+
+@section Scripts{
+<script>
+  $(function () {
+    $(".datepicker").datepicker({
+      dateFomat: "yy-mm-dd"
+    });
+
+  });
+  // Add the following code if you want the name of the file appear on select
+  $(".custom-file-input").on("change", function () {
+    var fileName = $(this).val().split("\\").pop();
+    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+  });
+
+        $(function () {
+
+            $("#LoanType").change(function () {
+
+                var val1 = $(this).val();
+                var result = "";
+                switch (val1) {
+
+                    case "personal":
+                        result = "25%";
+                        break;
+                    case "home":
+                        result = "10%";
+                        break;
+                    case "vehicle":
+                        result = "15%";
+                        break;
+                }
+                $("#InterestRate").val(result);
+            });
+        });
+
+</script>
+}
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

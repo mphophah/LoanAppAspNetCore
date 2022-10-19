@@ -1,0 +1,40 @@
+.login p {
+}
+
+.login .nav-item .nav-link {
+    display: flex;
+}
+.login .nav-item .nav-link  p {
+    padding-left: 4px;
+}
+
+ label:not(.form-check-label):not(.custom-file-label) {
+    font-weight: normal;
+}
+
+.wrapper-inner-card {
+    padding: .5rem 0;
+}
+
+.wrapper-inner-card .btn.back {
+/* background-color: #343a40; */
+
+}
+.wrapper-inner-card .btn.back a {
+    color: white;
+    padding: 0 1rem;
+}
+
+.btn-dlt {
+    background-color: transparent;
+    border: none;
+    color: red ;
+    /* background-color: red; */
+}
+
+.btn-info {
+    background-color: transparent;
+    color: green;
+    /* background-color: red; */
+}
+

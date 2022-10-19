@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+    <div class="text-center alert alert-dark" >
+        <h1 class="display-4">Loan System</h1>
+    </div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3>@ViewBag.TotalCustomers</h3>
+                    <p>Customers</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="small-box bg-gradient-success">
+                <div class="inner">
+                    <h3>@ViewBag.TotalLoans</h3>
+                    <p>Loans</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-money-plus"></i>
+                </div>
+    
+            </div>
+        </div>
+
+    </div>
+</div>

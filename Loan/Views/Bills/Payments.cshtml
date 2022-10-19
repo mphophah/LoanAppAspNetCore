@@ -1,0 +1,84 @@
+
+@{
+    ViewData["Title"] = "Payment";
+}
+
+<h1>Ticket Types</h1>
+<hr/>
+<p>
+    <a asp-action="Create" class="btn btn-success"> <i class="fa fa-plus" aria-hidden="true"></i> Create New</a>
+</p>
+<table id="tblData" class="table">
+    <thead>
+        <tr>
+            <th>
+                Invoice
+            </th>
+            <th>
+                Payment Date
+            </th>
+            <th>
+                Invoice Type
+            </th>
+            <th>
+               Tenant Name
+            </th>
+            <th>
+              Room Number
+            </th>
+
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                blah blah
+            </td>
+            <td>
+                12/12/2012
+            </td>
+
+            <td>
+               EFT
+            </td>
+
+            <td>
+               John Doe
+            </td>
+            <td>
+               B 12
+            </td>
+
+
+            <td>
+               <div class="row">
+                   <div class="col-2">
+                       <a asp-action="Edit" class="btn btn-warning" >
+                           <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                       </a>
+                   </div>
+                   <div class="col-2">
+                       <a asp-action="Details" class="btn btn-info" >
+                           <i class="fas fa-info-circle" aria-hidden="true"></i>
+                       </a>
+                   </div>
+                   <div class="col-2">
+                       <form asp-action="Delete" method="post">
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this record?')">
+                                <i class="fas fa-trash" aria-hidden="true"></i>
+                            </button>
+                        </form>
+                   </div>
+               </div>
+                
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+@section Scripts{ 
+<script>
+    
+</script>
+}
