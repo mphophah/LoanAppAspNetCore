@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using Microsoft.VisualBasic;
 using Microsoft.EntityFrameworkCore;
 using Org.BouncyCastle.Math.EC.Rfc7748;
+using Microsoft.AspNetCore.Identity;
 
 namespace AMS.Controllers
 {
@@ -110,60 +111,57 @@ namespace AMS.Controllers
         // GET: Loan/Edit/5
         public async Task<ActionResult> Edit(int id)
         {
-            var isExists = await _unitOfWork.Loans.isExists(q => q.Id == id);
+            var loanApp = await _unitOfWork.Loans.Find(q => q.Id == id,
+            includes: q => q.Include(x => x.Customer));
 
-            if (!isExists)
-            {
-                return NotFound();
-            }
-
-            
-            var dfd = await _db.Loans.Include(x => x.Customer).FirstAsync(x => x.Id == id);
-          //  var loans = await _unitOfWork.Loans.Find(q => q.Id == id);
-            var model = _mapper.Map<LoanVM>(dfd);
-            //  PopulateCustomersDropDownList(dfd.CustomerId);
-          //  ViewBag.CustomerId = new SelectList("Id", "FirstName", dfd);
-            
+            var model = _mapper.Map<EditLoanVM>(loanApp);
             return View(model);
         }
-      /*  private SelectList GetCustomerList(int id)
-        {
-            return _db.Loans.Include(x => x.Customer)
-              .Select(e => new SelectListItem
-              {
-                  Value = e.Customer.Id,
-                  Text = e.Customer.FirstName
-              })
-             .ToList();
-        }*/
+
         // POST: Loan/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit( LoanVM model)
         {
-
             try
             {
-                // TODO: Add update logic here
                 if (!ModelState.IsValid)
                 {
                     return View(model);
                 }
+                // var record = await _unitOfWork.Loans.Find(q => q.Id == model.Id, includes: q => q.Include(x => x.Customer));
+              //  var record = await _unitOfWork.Loans.Find(q => q.Id == model.Id);
                 var loans = _mapper.Map<Loan>(model);
                 _unitOfWork.Loans.Update(loans);
                 await _unitOfWork.Save();
-                
-               // ViewBag.StudentId = new SelectList(db.Students, "Id", "FirstName", subject.StudentId);
+
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                ModelState.AddModelError("", "Something Went Wrong...");
                 return View(model);
             }
         }
 
+      /*  // GET: LeaveAllocation/Details/5
+        public async Task<ActionResult> Details(string id)
+        {
 
+            var records = await _unitOfWork.Loans.FindAll(
+                expression: q => q.CustomerId.ToString() == id,
+                includes: q => q.Include(x => x.LeaveType));
+
+            var allocations = _mapper.Map<List<LoanVM>>
+                    (records);
+
+            var model = new ViewAllocationsVM
+            {
+                Employee = employee,
+                LeaveAllocations = allocations
+            };
+            return View(model);
+        }
+      */
 
         // POST: Reservation/Delete/5
         [HttpPost]

@@ -15,6 +15,7 @@ namespace AMS.Mappings
             CreateMap<Employee, EmployeeVM>().ReverseMap();
             CreateMap<Customer, CustomerVM>().ReverseMap();
             CreateMap<Loan, LoanVM>().ReverseMap();
+            CreateMap<Loan, EditLoanVM>().ReverseMap();
         }
     }
 }

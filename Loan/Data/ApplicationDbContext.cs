@@ -17,6 +17,7 @@ namespace AMS.Data
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Loan> Loans { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<AMS.Models.EditLoanVM> EditLoanVM { get; set; }
         
 
     }
