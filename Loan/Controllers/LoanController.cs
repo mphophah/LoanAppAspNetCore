@@ -113,8 +113,11 @@ namespace AMS.Controllers
         {
             var loanApp = await _unitOfWork.Loans.Find(q => q.Id == id,
             includes: q => q.Include(x => x.Customer));
-
+       
             var model = _mapper.Map<EditLoanVM>(loanApp);
+
+            ViewBag.CustomerId = new SelectList(_db.Customers, "Id", "FirstName", model.CustomerId);
+
             return View(model);
         }
 
